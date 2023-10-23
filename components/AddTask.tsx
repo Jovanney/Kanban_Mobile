@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
     columnId: string;
+    addNewTask: (newTask: Task) => void;
 }
 
 interface Task {
@@ -14,7 +15,7 @@ interface Task {
     position: number;
 }
 
-const AddTask: React.FC<Props> = ({ columnId }) => {
+const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
     const [title, setTitle] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -32,27 +33,20 @@ const AddTask: React.FC<Props> = ({ columnId }) => {
         fetchTasks();
     }, []);
 
-    useEffect(() => {
-        console.log(tasks);
-    }, [tasks]);
-
     const handleAddTask = async () => {
         const newTask: Task = {
             id: uuidv4(),
             title,
             columnId,
-            position: tasks.length,
+            position: tasks.filter((task) => task.columnId === columnId).length,
         };
         try {
-            const tasks = await AsyncStorage.getItem('tasks');
-            const parsedTasks: Task[] = tasks ? JSON.parse(tasks) : [];
-            await AsyncStorage.setItem(
-                'tasks',
-                JSON.stringify([...parsedTasks, newTask])
-            );
+            // Call the callback function to add the new task
+            addNewTask(newTask);
+
+            // Clear the input field
             setTitle('');
             setModalVisible(false);
-            setTasks([...parsedTasks, newTask]);
         } catch (error) {
             console.log(error);
         }
