@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import React from 'react';
-import Nested from '../../components/Nested';
+import KanbanBoard from '../../components/KanbanBoard';
 
 
 
@@ -10,7 +10,7 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Kanban Board</Text>
       <View style={styles.nestedContainer}>
-        <Nested></Nested>
+        <KanbanBoard/>
       </View>
     </View>
   );
