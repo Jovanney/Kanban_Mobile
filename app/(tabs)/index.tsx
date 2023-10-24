@@ -8,7 +8,6 @@ import KanbanBoard from '../../components/KanbanBoard';
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Kanban Board</Text>
       <View style={styles.nestedContainer}>
         <KanbanBoard/>
       </View>

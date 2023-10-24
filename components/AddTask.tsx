@@ -41,7 +41,15 @@ const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
             position: tasks.filter((task) => task.columnId === columnId).length,
         };
         try {
-            // Call the callback function to add the new task
+            // Save the new task to AsyncStorage
+            const tasks = await AsyncStorage.getItem('tasks');
+            const parsedTasks: Task[] = tasks ? JSON.parse(tasks) : [];
+            await AsyncStorage.setItem(
+                'tasks',
+                JSON.stringify([...parsedTasks, newTask])
+            );
+
+            // Update the state with the new task
             addNewTask(newTask);
 
             // Clear the input field
@@ -53,7 +61,7 @@ const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
     };
 
     return (
-        <View>
+        <View style={{ marginRight: 10 }}>
             <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
                 <Text style={styles.addButtonText}>+</Text>
             </TouchableOpacity>
@@ -86,7 +94,7 @@ const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
 
 const styles = StyleSheet.create({
     addButton: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#8AA6A3',
         borderRadius: 40,
         padding: 10,
         elevation: 2,
