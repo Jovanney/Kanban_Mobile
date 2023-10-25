@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextInput, Modal, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Button, TextInput, Modal, View, StyleSheet, TouchableOpacity, Text, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,6 +13,7 @@ interface Task {
     title: string;
     columnId: string;
     position: number;
+    completedDate?: Date;
 }
 
 const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
@@ -40,6 +41,9 @@ const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
             columnId,
             position: tasks.filter((task) => task.columnId === columnId).length,
         };
+        if (columnId === 'done') {
+            newTask.completedDate = new Date();
+          }
         try {
             // Save the new task to AsyncStorage
             const tasks = await AsyncStorage.getItem('tasks');
@@ -82,8 +86,12 @@ const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
                             style={styles.titleInput}
                         />
                         <View style={styles.buttonContainer}>
-                            <Button title="Save" onPress={handleAddTask}/>
-                            <Button title="Cancel" onPress={() => setModalVisible(false)} />
+                            <Pressable style={styles.buttonOption} onPress={() => setModalVisible(false)}>
+                                <Text style={styles.textStyle}>Cancel</Text>
+                            </Pressable>
+                            <Pressable style={styles.buttonOption} onPress={handleAddTask}>
+                                <Text style={styles.textStyle}>Save</Text>
+                            </Pressable>
                         </View>
                     </View>
                 </View>
@@ -112,8 +120,8 @@ const styles = StyleSheet.create({
     },
     modalView: {
         justifyContent: 'space-between',
-        width: '50%',
-        height: '30%',
+        width: 300,
+        height: 230,
         backgroundColor: 'white',
         borderRadius: 30,
         alignItems: 'center',
@@ -138,7 +146,19 @@ const styles = StyleSheet.create({
           justifyContent : "space-between",
           width : "90%",
           padding : 10,
-      }
+      },
+      buttonOption: {
+        backgroundColor: '#2196F3',
+        borderRadius: 8,
+        width: 100,
+        height: 30,
+        justifyContent: 'center',
+      },
+      textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
 });
 
 

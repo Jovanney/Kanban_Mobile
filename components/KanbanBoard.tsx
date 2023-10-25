@@ -15,6 +15,7 @@ interface Task {
   title: string;
   columnId: string;
   position: number;
+  completedDate?: Date;
 }
 
 export default function Basic() {
@@ -58,13 +59,16 @@ export default function Basic() {
     if (editingTask && selectedColumn) {
       const updatedTasks = [...tasks];
       const taskIndex = updatedTasks.findIndex((task) => task.id === editingTask.id);
-      
+
       if (taskIndex !== -1) {
-        updatedTasks[taskIndex] = {
+        const isDone = editingTask.columnId === 'done';
+        const newTask = {
           ...editingTask,
           columnId: selectedColumn,
           position: getColumnTasks(selectedColumn).length,
+          completedDate: isDone && selectedColumn === 'done' ? new Date() : !isDone && selectedColumn === 'done' ? undefined : editingTask.completedDate,
         };
+        updatedTasks[taskIndex] = newTask;
 
         setTasks(updatedTasks);
 
@@ -104,7 +108,6 @@ export default function Basic() {
 
   const editTask = (task: Task) => {
     setEditingTask(task);
-    console.log(task);
     setModalVisible(true);
   };
 
