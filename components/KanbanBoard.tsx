@@ -126,7 +126,7 @@ export default function Basic() {
           style={[
             styles.rowItem,
             {
-              backgroundColor: isActive ? '#8AA6A3' : '#A8BFBD',
+              backgroundColor: isActive ? '#056CF2' : '#5E9FF2',
               borderWidth: 1,
               borderColor: 'black',
             },
@@ -145,7 +145,7 @@ export default function Basic() {
   const keyExtractor = (item: Task) => item.id;
 
   return (
-    <NestableScrollContainer style={{ backgroundColor: '#085951' }}>
+    <NestableScrollContainer style={{ backgroundColor: '#F2F2F2' }}>
     {columns.map((column, index) => (
       <View key={column}>
         <Header
@@ -212,7 +212,7 @@ function Header({
           fontSize: 24,
           fontWeight: 'bold',
           padding: 24,
-          color: 'white',
+          color: 'black',
         }}>
         {text}
       </Text>
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   editButton: {
-    backgroundColor: '#012623',
+    backgroundColor: '#0540F2',
     padding: 10,
     borderRadius: 8,
   },

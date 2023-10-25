@@ -102,7 +102,7 @@ const AddTask: React.FC<Props> = ({ columnId, addNewTask  }) => {
 
 const styles = StyleSheet.create({
     addButton: {
-        backgroundColor: '#8AA6A3',
+        backgroundColor: '#0439D9',
         borderRadius: 40,
         padding: 10,
         elevation: 2,

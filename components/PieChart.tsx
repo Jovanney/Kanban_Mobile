@@ -12,8 +12,7 @@ export default function MyPieChart(props: { data: any[] }) {
                 height={300}
                 chartConfig={{
                     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    backgroundGradientFrom: '#1E2923',
-                    backgroundGradientTo: '#08130D',
+
                 }}
                 accessor="population"
                 backgroundColor="transparent"
@@ -26,7 +25,7 @@ export default function MyPieChart(props: { data: any[] }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         borderRadius: 10,
         padding: 10,
         marginVertical: 10,

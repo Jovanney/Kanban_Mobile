@@ -13,8 +13,8 @@ export default function MyLineChart(props: { data: ChartData }) {
             width={Dimensions.get('window').width}
             height={400}
             chartConfig={{
-              backgroundGradientFrom: 'darkblue',
-              backgroundGradientTo: 'blue',
+              backgroundGradientFrom: '#056CF2',
+              backgroundGradientTo: '#0439D9',
               color: (opacity = 3) => `rgba(255, 255, 255, ${opacity})`
             }}
           />

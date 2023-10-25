@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import MyPieChart from '../../components/PieChart';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -73,28 +73,34 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
-      <MyPieChart data={pieData} />
-      {lineChartData.labels.length > 0 && (
-        <MyLineChart data={lineChartData} />
-      )}
+      <View style={styles.chartContainer}>
+        <MyPieChart data={pieData} />
+      </View>
+      <View style={styles.separator} />
+      <View style={styles.chartContainer}>
+        {lineChartData.labels.length > 0 && (
+          <MyLineChart data={lineChartData} />
+        )}
+      </View>
     </View>
   );
 }
 
-const COLORS = ['#8AA6A3', '#085951', 'green'];
+const COLORS = ['#725EF2', '#056CF2', '#010626'];
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  chartContainer: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 10,
     height: 1,
-    width: '80%',
   },
 });
